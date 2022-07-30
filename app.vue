@@ -3,7 +3,7 @@
         <aside class="aside">
             <h2>Добавление товара</h2>
 
-            <AppForm @formSubmit="addProduct" />
+            <AppForm @addProduct="store.addProduct(product)" />
         </aside>
         
         <main class="main">
@@ -11,12 +11,14 @@
 
             <div class="products">
                 <AppProduct
-                    v-for="{id, img, title, text, price} in store.getProducts"
+                    v-for="{ id, link, name, description, price } in store.getProducts"
+                    :id="id"
                     :key="id"
-                    :img="img"
-                    :title="title"
-                    :text="text"
+                    :link="link"
+                    :name="name"
+                    :description="description"
                     :price="price"
+                    @deleteProduct="store.deleteProduct(id)"
                 />
             </div>
         </main>
@@ -27,8 +29,6 @@
 import {useProductsStore} from '/store/products.js'
 
 const store = useProductsStore()
-
-const addProduct = product => store.addProduct(product)
 
 const options = ref([
     {

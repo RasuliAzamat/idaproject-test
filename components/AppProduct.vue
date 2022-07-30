@@ -1,17 +1,17 @@
 <template>
     <div class="products__item">
-        <img :src="img" :alt="title" class="products__item--img" />
+        <img :src="link" :alt="name" class="products__item--img" />
         <h3 class="products__item--title">
-            {{ title }}
+            {{ name }}
         </h3>
         <p class="products__item--text">
-            {{ text }}
+            {{ description }}
         </p>
         <strong class="products__item--price">
             {{ toCurrency(price) }} руб.
         </strong>
 
-        <div class="products__item--trashbox">
+        <div class="products__item--trashbox" @click="$emit('deleteProduct', id)">
             <IconsTrashbox />
         </div>
     </div>
@@ -20,17 +20,21 @@
 <script setup>
 import { toCurrency } from '/utils/toCurrency.js'
 
-const { img, title, text, price } = defineProps({
-    img: {
+const { id, link, name, description, price } = defineProps({
+    id: {
+        type: Number,
+        required: true,
+    },
+    link: {
         type: String,
         required: true,
     },
-    title: {
+    name: {
         type: String,
         required: true,
     },
-    text: {
-        type: String,
+    description: {
+        type: [String, undefined, null],
         required: false,
     },
     price: {
