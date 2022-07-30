@@ -22,7 +22,7 @@ import { toCurrency } from '/utils/toCurrency.js'
 
 const { id, link, name, description, price } = defineProps({
     id: {
-        type: Number,
+        type: String,
         required: true,
     },
     link: {
