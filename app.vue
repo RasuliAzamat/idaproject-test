@@ -28,9 +28,7 @@ import {useProductsStore} from '/store/products.js'
 
 const store = useProductsStore()
 
-const addProduct = product => {
-    console.log(product)
-}
+const addProduct = product => store.addProduct(product)
 
 const options = ref([
     {

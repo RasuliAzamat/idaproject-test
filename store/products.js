@@ -51,8 +51,12 @@ export const useProductsStore = defineStore('products', {
     getters: {
         getProducts(state) {
             return state.products
-        },
+        }
     },
 
-    actions: {},
+    actions: {
+        addProduct(product) {
+            this.products.push(product)
+        }
+    },
 })

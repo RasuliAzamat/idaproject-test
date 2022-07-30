@@ -50,7 +50,7 @@ const { img, title, text, price } = defineProps({
     background-color: #fffefb;
     box-shadow: 0px 20px 30px rgba(0, 0, 0, 0.04),
         0px 6px 10px rgba(0, 0, 0, 0.02);
-    transition: all 0.2s ease-in-out;
+    transition: all 0.3s ease-in-out;
 
     &--img {
         border-top-right-radius: 4px;
