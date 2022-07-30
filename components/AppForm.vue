@@ -170,7 +170,7 @@ const formSubmit = () => {
 
         emit('addProduct', product)
         
-        nameModel.value = descriptionModel.value = linkModel.value = priceValue.value = null
+        nameModel.value = descriptionModel.value = linkModel.value = priceValue.value = validName.value = validLink.value = validPrice.value = null
     }
 }
 </script>

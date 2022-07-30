@@ -5,28 +5,36 @@
 
             <AppForm @addProduct="addProduct" />
         </aside>
-        
+
         <main class="main">
             <UiSelect v-model="sortOptionBy" :options="options" />
 
             <div class="products">
-                <AppProduct
-                    v-for="{ id, link, name, description, price } in sortedProducts"
-                    :id="id"
-                    :key="id"
-                    :link="link"
-                    :name="name"
-                    :description="description"
-                    :price="price"
-                    @deleteProduct="store.deleteProduct(id)"
-                />
+                <TransitionGroup name="products">
+                    <AppProduct
+                        v-for="{
+                            id,
+                            link,
+                            name,
+                            description,
+                            price,
+                        } in sortedProducts"
+                        :id="id"
+                        :key="id"
+                        :link="link"
+                        :name="name"
+                        :description="description"
+                        :price="price"
+                        @deleteProduct="store.deleteProduct(id)"
+                    />
+                </TransitionGroup>
             </div>
         </main>
     </div>
 </template>
 
 <script setup>
-import { useProductsStore } from '/store/products.js'
+import {useProductsStore} from '/store/products.js'
 
 const store = useProductsStore()
 
@@ -36,17 +44,23 @@ const sortOptionBy = ref('default')
 
 const sortedProducts = computed(() => {
     if (sortOptionBy.value === 'increase') {
-        return [...store.getProducts].sort((product1, product2) => product1.price - product2.price) 
+        return [...store.getProducts].sort(
+            (product1, product2) => product1.price - product2.price
+        )
     }
-    
+
     if (sortOptionBy.value === 'decrease') {
-        return [...store.getProducts].sort((product1, product2) => product1.price - product2.price).reverse() 
+        return [...store.getProducts]
+            .sort((product1, product2) => product1.price - product2.price)
+            .reverse()
     }
-    
+
     if (sortOptionBy.value === 'naming') {
-        return [...store.getProducts].sort((product1, product2) => product1.name.localeCompare(product2.name))
+        return [...store.getProducts].sort((product1, product2) =>
+            product1.name.localeCompare(product2.name)
+        )
     }
-    
+
     return store.getProducts
 })
 
@@ -117,6 +131,21 @@ const options = ref([
     gap: 20px 20px;
 
     margin-bottom: 50px;
+}
+
+.products-enter-active,
+.products-leave-active {
+    transition: opacity 0.2s ease, transform 0.5s ease;
+}
+
+.products-enter-from,
+.products-leave-to {
+    transform: translateY(100px);
+    opacity: 0;
+}
+
+.products-move {
+    transition: transform 0.4s ease;
 }
 
 @media (min-width: 600px) {
