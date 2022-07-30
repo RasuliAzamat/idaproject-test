@@ -30,7 +30,8 @@ const { type } = defineProps({
     background-color: #7bae73;
     transition: all 0.2s ease-in-out;
 
-    &:hover {
+    &:hover,
+    &:focus {
         background-color: #7caf74e6;
     }
 

@@ -1,6 +1,9 @@
 <template>
     <div class="select-wrapper">
-        <select class="select">
+        <select 
+            class="select" 
+            v-model="modelValue" 
+            @change="changeOption">
             <option
                 v-for="{ id, value, text } in options"
                 :key="id"
@@ -14,12 +17,20 @@
 </template>
 
 <script setup>
-const { options } = defineProps({
+const emit = defineEmits(['update:modelValue'])
+
+const { modelValue, options } = defineProps({
+    modelValue: {
+        type: String,
+    },
     options: {
         type: Array,
-        required: true,
+        default: () => []
     },
 })
+
+const changeOption = event => emit('update:modelValue', event.target.value)
+
 </script>
 
 <style lang="scss" scoped>

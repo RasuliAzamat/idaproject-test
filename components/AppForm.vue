@@ -70,7 +70,7 @@
 <script setup>
 import {toCurrency} from '/utils/toCurrency.js'
 
-const emit = defineEmits(['formSubmit'])
+const emit = defineEmits(['addProduct'])
 
 // NAME INPUT
 
@@ -165,10 +165,12 @@ const formSubmit = () => {
             name: nameModel.value,
             description: descriptionModel.value,
             link: linkModel.value,
-            price: priceModel.value,
+            price: priceValue.value,
         })
 
-        emit('formSubmit', product)
+        emit('addProduct', product)
+        
+        nameModel.value = descriptionModel.value = linkModel.value = priceValue.value = validName.value = validLink.value = validPrice.value = null
     }
 }
 </script>

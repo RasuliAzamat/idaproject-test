@@ -3,21 +3,31 @@
         <aside class="aside">
             <h2>Добавление товара</h2>
 
-            <AppForm @formSubmit="addProduct" />
+            <AppForm @addProduct="addProduct" />
         </aside>
-        
+
         <main class="main">
-            <UiSelect selectName="filter" :options="options" />
+            <UiSelect v-model="sortOptionBy" :options="options" />
 
             <div class="products">
-                <AppProduct
-                    v-for="{id, img, title, text, price} in store.getProducts"
-                    :key="id"
-                    :img="img"
-                    :title="title"
-                    :text="text"
-                    :price="price"
-                />
+                <TransitionGroup name="products">
+                    <AppProduct
+                        v-for="{
+                            id,
+                            link,
+                            name,
+                            description,
+                            price,
+                        } in sortedProducts"
+                        :id="id"
+                        :key="id"
+                        :link="link"
+                        :name="name"
+                        :description="description"
+                        :price="price"
+                        @deleteProduct="store.deleteProduct(id)"
+                    />
+                </TransitionGroup>
             </div>
         </main>
     </div>
@@ -29,6 +39,30 @@ import {useProductsStore} from '/store/products.js'
 const store = useProductsStore()
 
 const addProduct = product => store.addProduct(product)
+
+const sortOptionBy = ref('default')
+
+const sortedProducts = computed(() => {
+    if (sortOptionBy.value === 'increase') {
+        return [...store.getProducts].sort(
+            (product1, product2) => product1.price - product2.price
+        )
+    }
+
+    if (sortOptionBy.value === 'decrease') {
+        return [...store.getProducts]
+            .sort((product1, product2) => product1.price - product2.price)
+            .reverse()
+    }
+
+    if (sortOptionBy.value === 'naming') {
+        return [...store.getProducts].sort((product1, product2) =>
+            product1.name.localeCompare(product2.name)
+        )
+    }
+
+    return store.getProducts
+})
 
 const options = ref([
     {
@@ -97,6 +131,21 @@ const options = ref([
     gap: 20px 20px;
 
     margin-bottom: 50px;
+}
+
+.products-enter-active,
+.products-leave-active {
+    transition: opacity 0.2s ease, transform 0.5s ease;
+}
+
+.products-enter-from,
+.products-leave-to {
+    transform: translateY(100px);
+    opacity: 0;
+}
+
+.products-move {
+    transition: transform 0.4s ease;
 }
 
 @media (min-width: 600px) {
