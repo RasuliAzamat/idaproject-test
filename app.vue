@@ -11,7 +11,7 @@
 
             <div class="products">
                 <AppProduct
-                    v-for="{id, img, title, text, price} in products"
+                    v-for="{id, img, title, text, price} in store.getProducts"
                     :key="id"
                     :img="img"
                     :title="title"
@@ -24,54 +24,13 @@
 </template>
 
 <script setup>
+import {useProductsStore} from '/store/products.js'
+
+const store = useProductsStore()
+
 const addProduct = product => {
     console.log(product)
 }
-
-const products = ref([
-    {
-        id: 1,
-        img: 'https://www.lifeinnorway.net/wp-content/uploads/2022/02/faroe-islands-waterfall-sunset.jpg',
-        title: 'Наименование товара 1',
-        text: 'Довольно-таки интересное описание товара в несколько строк. Довольно-таки интересное описание товара в несколько строк',
-        price: 10000,
-    },
-    {
-        id: 2,
-        img: 'https://www.lifeinnorway.net/wp-content/uploads/2022/02/faroe-islands-waterfall-sunset.jpg',
-        title: 'Наименование товара 2',
-        text: 'Довольно-таки интересное описание товара в несколько строк. Довольно-таки интересное описание товара в несколько строк',
-        price: 12000,
-    },
-    {
-        id: 3,
-        img: 'https://www.lifeinnorway.net/wp-content/uploads/2022/02/faroe-islands-waterfall-sunset.jpg',
-        title: 'Наименование товара 3',
-        text: 'Довольно-таки интересное описание товара в несколько строк. Довольно-таки интересное описание товара в несколько строк',
-        price: 6000,
-    },
-    {
-        id: 4,
-        img: 'https://www.lifeinnorway.net/wp-content/uploads/2022/02/faroe-islands-waterfall-sunset.jpg',
-        title: 'Наименование товара 4',
-        text: 'Довольно-таки интересное описание товара в несколько строк. Довольно-таки интересное описание товара в несколько строк',
-        price: 20000,
-    },
-    {
-        id: 5,
-        img: 'https://www.lifeinnorway.net/wp-content/uploads/2022/02/faroe-islands-waterfall-sunset.jpg',
-        title: 'Наименование товара 5',
-        text: 'Довольно-таки интересное описание товара в несколько строк. Довольно-таки интересное описание товара в несколько строк',
-        price: 2000,
-    },
-    {
-        id: 6,
-        img: 'https://www.lifeinnorway.net/wp-content/uploads/2022/02/faroe-islands-waterfall-sunset.jpg',
-        title: 'Наименование товара 6',
-        text: 'Довольно-таки интересное описание товара в несколько строк. Довольно-таки интересное описание товара в несколько строк',
-        price: 5500,
-    },
-])
 
 const options = ref([
     {
