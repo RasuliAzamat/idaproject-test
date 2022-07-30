@@ -91,6 +91,8 @@ const { id, link, name, description, price } = defineProps({
         border-bottom-left-radius: 10px;
         border-top-right-radius: 4px;
 
+        cursor: pointer;
+
         background-color: #ff8484;
         box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
         transition: all 0.2s ease-in-out;

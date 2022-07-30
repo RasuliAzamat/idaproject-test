@@ -169,6 +169,8 @@ const formSubmit = () => {
         })
 
         emit('addProduct', product)
+        
+        nameModel.value = descriptionModel.value = linkModel.value = priceValue.value = null
     }
 }
 </script>
