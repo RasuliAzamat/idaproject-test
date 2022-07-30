@@ -3,22 +3,18 @@
         <aside class="aside">
             <h2>Добавление товара</h2>
 
-            <AppForm @addProduct="addProduct" />
+            <AppForm @postProduct="postProduct" />
         </aside>
 
         <main class="main">
             <UiSelect v-model="sortOptionBy" :options="options" />
 
             <div class="products">
-                <TransitionGroup name="products">
+                <p v-if="sortedProducts.length === 0">Список товаров пуст</p>
+
+                <TransitionGroup name="products" v-else>
                     <AppProduct
-                        v-for="{
-                            id,
-                            link,
-                            name,
-                            description,
-                            price,
-                        } in sortedProducts"
+                        v-for="{ id, link, name, description, price } in sortedProducts"
                         :id="id"
                         :key="id"
                         :link="link"
@@ -36,29 +32,25 @@
 <script setup>
 import {useProductsStore} from '/store/products.js'
 
+onBeforeMount(() => store.fetchProducts())
+
 const store = useProductsStore()
 
-const addProduct = product => store.addProduct(product)
+const postProduct = product => store.postProduct(product)
 
 const sortOptionBy = ref('default')
 
 const sortedProducts = computed(() => {
     if (sortOptionBy.value === 'increase') {
-        return [...store.getProducts].sort(
-            (product1, product2) => product1.price - product2.price
-        )
+        return [...store.getProducts].sort((product1, product2) => product1.price - product2.price)
     }
 
     if (sortOptionBy.value === 'decrease') {
-        return [...store.getProducts]
-            .sort((product1, product2) => product1.price - product2.price)
-            .reverse()
+        return [...store.getProducts].sort((product1, product2) => product1.price - product2.price).reverse()
     }
 
     if (sortOptionBy.value === 'naming') {
-        return [...store.getProducts].sort((product1, product2) =>
-            product1.name.localeCompare(product2.name)
-        )
+        return [...store.getProducts].sort((product1, product2) => product1.name.localeCompare(product2.name))
     }
 
     return store.getProducts
