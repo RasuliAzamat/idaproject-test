@@ -1,22 +1,19 @@
 <template>
     <input
         :type="type"
-        :name="name"
         :id="id"
         :placeholder="placeholder"
-        :class="['input', {error: error}]"
+        :class="['input', { 'error': error }]"
+        :value="modelValue"
+        @input="$emit('update:modelValue', $event.target.value)"
     />
 </template>
 
 <script setup>
-const {type, name, id, placeholder} = defineProps({
+const { type, id, placeholder, error, modelValue } = defineProps({
     type: {
         type: String,
         default: 'text',
-    },
-    name: {
-        type: String,
-        required: false,
     },
     id: {
         type: String,
@@ -27,8 +24,12 @@ const {type, name, id, placeholder} = defineProps({
         required: false,
     },
     error: {
-        type: Boolean,
-        default: false,
+        type: String,
+        default: '',
+    },
+    modelValue: {
+        type: [String, Number],
+        required: false,
     },
 })
 </script>
@@ -51,15 +52,17 @@ const {type, name, id, placeholder} = defineProps({
     line-height: 15px;
     box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
     -webkit-box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
-    transition: all 0.3s ease-in-out;
+    transition: all 0.2s ease-in-out;
 
     &.error {
         border-color: #ff8484;
     }
 
     &:focus {
-        box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.1), 0px 1px 3px rgba(0, 0, 0, 0.1);
-        -webkit-box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.1), 0px 1px 3px rgba(0, 0, 0, 0.1);
+        box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.1),
+            0px 1px 3px rgba(0, 0, 0, 0.1);
+        -webkit-box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.1),
+            0px 1px 3px rgba(0, 0, 0, 0.1);
     }
 
     &::placeholder {

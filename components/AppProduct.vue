@@ -18,9 +18,9 @@
 </template>
 
 <script setup>
-import {toCurrency} from '/utils/toCurrency.js'
+import { toCurrency } from '/utils/toCurrency.js'
 
-const {img, title, text, price} = defineProps({
+const { img, title, text, price } = defineProps({
     img: {
         type: String,
         required: true,

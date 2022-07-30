@@ -3,85 +3,15 @@
         <aside class="aside">
             <h2>Добавление товара</h2>
 
-            <form action="#" class="form">
-                <div class="form__field _required">
-                    <label for="name" class="form__label">
-                        Наименование товара
-                    </label>
-                    <uiInput
-                        name="name"
-                        id="name"
-                        placeholder="Введите наименование товара"
-                        class="form__input"
-                        :error="false"
-                    />
-                    <small v-if="false" class="form__error">
-                        Далеко-далеко за словесными горами в стране.
-                    </small>
-                </div>
-
-                <div class="form__field">
-                    <label for="description" class="form__label">
-                        Описание товара
-                    </label>
-                    <UiInput
-                        name="description"
-                        id="description"
-                        placeholder="Введите описание товара"
-                        class="form__input"
-                        :error="false"
-                    />
-                    <small v-if="false" class="form__error">
-                        Далеко-далеко за словесными горами в стране.
-                    </small>
-                </div>
-
-                <div class="form__field _required">
-                    <label for="link" class="form__label">
-                        Ссылка на изображение товара
-                    </label>
-                    <UiInput
-                        name="link"
-                        id="link"
-                        placeholder="Введите ссылку"
-                        class="form__input"
-                        :error="false"
-                    />
-                    <small v-if="false" class="form__error">
-                        Далеко-далеко за словесными горами в стране.
-                    </small>
-                </div>
-
-                <div class="form__field _required">
-                    <label for="price" class="form__label">
-                        Цена товара
-                    </label>
-                    <UiInput
-                        type="number"
-                        name="price"
-                        id="price"
-                        placeholder="Введите цену"
-                        class="form__input"
-                        :error="false"
-                    />
-                    <small v-if="false" class="form__error">
-                        Далеко-далеко за словесными горами в стране.
-                    </small>
-                </div>
-
-                <UiButton :disabled="false">Отправить</UiButton>
-            </form>
+            <AppForm @formSubmit="addProduct" />
         </aside>
+        
         <main class="main">
-            <UiSelect
-                selectName="filter"
-                :options="options"
-                style="margin: 15px 0 30px auto"
-            />
+            <UiSelect selectName="filter" :options="options" />
 
             <div class="products">
                 <AppProduct
-                    v-for="{ id, img, title, text, price } in products"
+                    v-for="{id, img, title, text, price} in products"
                     :key="id"
                     :img="img"
                     :title="title"
@@ -94,6 +24,10 @@
 </template>
 
 <script setup>
+const addProduct = product => {
+    console.log(product)
+}
+
 const products = ref([
     {
         id: 1,
@@ -191,59 +125,12 @@ const options = ref([
     }
 }
 
-.form {
-    padding: 15px;
-    border-radius: 4px;
-
-    box-shadow: 0px 20px 30px rgba(0, 0, 0, 0.04),
-        0px 6px 10px rgba(0, 0, 0, 0.02);
-
-    &__field {
-        margin-bottom: 17px;
-
-        &._required {
-            .form__label {
-                position: relative;
-
-                &::after {
-                    content: '';
-                    position: absolute;
-                    top: 0;
-
-                    width: 5px;
-                    height: 5px;
-                    margin-left: 5px;
-                    border-radius: 50%;
-
-                    background-color: #ff8484;
-                }
-            }
-        }
-
-        &:last-child {
-            margin-bottom: 25px;
-        }
-    }
-
-    &__label {
-        display: block;
-        margin-bottom: 3px;
-
-        font-size: 10px;
-        line-height: 13px;
-        letter-spacing: -0.02em;
-        color: #49485e;
-    }
-
-    &__error {
-        font-size: 10px;
-        line-height: 13px;
-        color: #ff8484;
-    }
-}
-
 .main {
     flex-basis: 75%;
+
+    .select-wrapper {
+        margin: 15px 0 30px auto;
+    }
 }
 
 .products {
@@ -254,7 +141,6 @@ const options = ref([
 
     margin-bottom: 50px;
 }
-
 
 @media (min-width: 600px) {
     .flex-container {
