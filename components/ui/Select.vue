@@ -1,6 +1,6 @@
 <template>
     <div class="select-wrapper">
-        <select name="filter" class="select">
+        <select class="select">
             <option
                 v-for="{ id, value, text } in options"
                 :key="id"
@@ -14,11 +14,7 @@
 </template>
 
 <script setup>
-const { selectName, options } = defineProps({
-    selectName: {
-        type: String,
-        required: true,
-    },
+const { options } = defineProps({
     options: {
         type: Array,
         required: true,
