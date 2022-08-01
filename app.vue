@@ -30,7 +30,7 @@
 </template>
 
 <script setup>
-import {useProductsStore} from '/store/products.js'
+import { useProductsStore } from '/store/products.js'
 
 onBeforeMount(() => store.fetchProducts())
 

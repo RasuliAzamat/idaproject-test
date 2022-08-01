@@ -1,6 +1,6 @@
-import {defineStore} from 'pinia'
-import {httpService} from '/utils/httpsService'
-import {transformFbData} from '/utils/transformFbData.js'
+import { defineStore } from 'pinia'
+import { httpService } from '/utils/httpsService'
+import { transformFbData } from '/utils/transformFbData.js'
 
 export const useProductsStore = defineStore('products', {
     state: () => ({
