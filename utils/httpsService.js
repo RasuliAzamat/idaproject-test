@@ -36,6 +36,4 @@ class HTTPService {
     }
 }
 
-export const httpService = new HTTPService(
-    'https://idaproject-test-app-default-rtdb.firebaseio.com'
-)
+export const httpService = new HTTPService('https://idaproject-test-app-default-rtdb.firebaseio.com')
