@@ -10,7 +10,6 @@ export default defineNuxtConfig({
                     content: 'width=device-width, initial-scale=1',
                 },
             ],
-            // script: [{ src: '' }],
             link: [
                 { rel: 'stylesheet', href: '/assets/styles/normalize.css' },
                 { rel: 'preconnect', href: 'https://fonts.googleapis.com' },

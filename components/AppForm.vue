@@ -68,7 +68,7 @@
 </template>
 
 <script setup>
-import {toCurrency} from '/utils/toCurrency.js'
+import { toCurrency } from '/utils/toCurrency.js'
 
 const emit = defineEmits(['postProduct'])
 
