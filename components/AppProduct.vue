@@ -1,17 +1,17 @@
 <template>
-    <div class="products__item">
-        <img :src="link" :alt="name" class="products__item--img" />
-        <h3 class="products__item--title">
+    <div class="product">
+        <img :src="link" :alt="name" class="product__img" />
+        <h3 class="product__title">
             {{ name }}
         </h3>
-        <p class="products__item--text">
+        <p class="product__text">
             {{ description }}
         </p>
-        <strong class="products__item--price">
+        <strong class="product__price">
             {{ toCurrency(price) }} руб.
-        </strong>
+        </strong> 
 
-        <div class="products__item--trashbox" @click="$emit('deleteProduct', id)">
+        <div class="product__trashbox" @click="$emit('deleteProduct', id)">
             <IconsTrashbox />
         </div>
     </div>
@@ -45,9 +45,10 @@ const { id, link, name, description, price } = defineProps({
 </script>
 
 <style lang="scss" scoped>
-.products__item {
+.product {
     position: relative;
 
+    max-height: 500px;
     border-radius: 4px;
     padding-bottom: 25px;
 
@@ -56,13 +57,17 @@ const { id, link, name, description, price } = defineProps({
         0px 6px 10px rgba(0, 0, 0, 0.02);
     transition: all 0.3s ease-in-out;
 
-    &--img {
+    &__img {
         border-top-right-radius: 4px;
         border-top-left-radius: 4px;
         max-width: 100%;
     }
 
-    &--title {
+    &__info {
+        margin-top: auto;
+    }
+
+    &__title {
         margin: 16px;
 
         font-weight: 600;
@@ -70,11 +75,11 @@ const { id, link, name, description, price } = defineProps({
         line-height: 25px;
     }
 
-    &--text {
+    &__text {
         margin: 16px 16px 32px 16px;
     }
 
-    &--price {
+    &__price {
         margin: 16px 16px 25px 16px;
 
         font-weight: 600;
@@ -82,7 +87,7 @@ const { id, link, name, description, price } = defineProps({
         line-height: 30px;
     }
 
-    &--trashbox {
+    &__trashbox {
         position: absolute;
         top: 0px;
         right: 0px;
@@ -104,8 +109,8 @@ const { id, link, name, description, price } = defineProps({
 }
 
 @media (min-width: 1024px) {
-    .products__item {
-        &--trashbox {
+    .product {
+        &__trashbox {
             top: -15px;
             right: -15px;
 
@@ -117,7 +122,7 @@ const { id, link, name, description, price } = defineProps({
         }
 
         &:hover {
-            .products__item--trashbox {
+            .product__trashbox {
                 top: -10px;
                 right: -10px;
                 transform: scale(1);

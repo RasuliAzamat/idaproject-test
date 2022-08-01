@@ -30,7 +30,7 @@
 </template>
 
 <script setup>
-import {useProductsStore} from '/store/products.js'
+import  { useProductsStore } from '/store/products.js'
 
 onBeforeMount(() => store.fetchProducts())
 
@@ -161,6 +161,7 @@ const options = ref([
 @media (min-width: 768px) {
     .aside {
         flex-basis: 35%;
+        
         margin-bottom: 0;
         margin-right: 20px;
     }
