@@ -1,69 +1,73 @@
 <template>
     <form class="form" @submit.prevent="formSubmit">
-        <div class="form__field _required">
-            <label for="name" class="form__label">
-                Наименование товара
-            </label>
-            <UiInput
-                id="name"
-                placeholder="Введите наименование товара"
-                class="form__input"
-                :error="nameError"
-                v-model.trim="nameModel"
-                @input="nameInputHandler"
-            />
-            <small v-if="nameError" class="form__error">
-                {{ nameError }}
-            </small>
-        </div>
+        <h2 class="form__title">Добавление товара</h2>
 
-        <div class="form__field">
-            <label for="description" class="form__label">
-                Описание товара
-            </label>
-            <UiInput
-                id="description"
-                placeholder="Введите описание товара"
-                class="form__input"
-                v-model.trim="descriptionModel"
-            />
-        </div>
+        <div class="form__wrapper">
+            <div class="form__field _required">
+                <label for="name" class="form__label">
+                    Наименование товара
+                </label>
+                <UiInput
+                    id="name"
+                    placeholder="Введите наименование товара"
+                    class="form__input"
+                    :error="nameError"
+                    v-model.trim="nameModel"
+                    @input="nameInputHandler"
+                />
+                <small v-if="nameError" class="form__error">
+                    {{ nameError }}
+                </small>
+            </div>
 
-        <div class="form__field _required">
-            <label for="link" class="form__label">
-                Ссылка на изображение товара
-            </label>
-            <UiInput
-                id="link"
-                placeholder="Введите ссылку"
-                class="form__input"
-                :error="linkError"
-                v-model.trim="linkModel"
-                @input="linkInputHandler"
-            />
-            <small v-if="linkError" class="form__error">
-                {{ linkError }}
-            </small>
-        </div>
+            <div class="form__field">
+                <label for="description" class="form__label">
+                    Описание товара
+                </label>
+                <textarea
+                    id="description"
+                    placeholder="Введите описание товара"
+                    class="form__input"
+                    v-model.trim="descriptionModel"
+                ></textarea>
+            </div>
 
-        <div class="form__field _required">
-            <label for="price" class="form__label">
-                Цена товара
-            </label>
-            <UiInput
-                id="price"
-                placeholder="Введите цену"
-                class="form__input"
-                :error="priceError"
-                v-model="priceModel"
-                @input="priceInputHandler"
-            />
-            <small v-if="priceError" class="form__error">
-                {{ priceError }}
-            </small>
-        </div>
+            <div class="form__field _required">
+                <label for="link" class="form__label">
+                    Ссылка на изображение товара
+                </label>
+                <UiInput
+                    id="link"
+                    placeholder="Введите ссылку"
+                    class="form__input"
+                    :error="linkError"
+                    v-model.trim="linkModel"
+                    @input="linkInputHandler"
+                />
+                <small v-if="linkError" class="form__error">
+                    {{ linkError }}
+                </small>
+            </div>
 
-        <UiButton :disabled="!isValidForm">Отправить</UiButton>
+            <div class="form__field _required">
+                <label for="price" class="form__label">
+                    Цена товара
+                </label>
+                <UiInput
+                    id="price"
+                    placeholder="Введите цену"
+                    class="form__input"
+                    :error="priceError"
+                    v-model="priceModel"
+                    @input="priceInputHandler"
+                />
+                <small v-if="priceError" class="form__error">
+                    {{ priceError }}
+                </small>
+            </div>
+
+            <UiButton :disabled="!isValidForm">Отправить</UiButton>
+        </div>
     </form>
 </template>
 
@@ -177,14 +181,27 @@ const formSubmit = () => {
 
 <style lang="scss" scoped>
 .form {
-    padding: 15px;
-    border-radius: 4px;
+    &__wrapper {
+        padding: 15px;
+        border-radius: 4px;
+        box-shadow: 0px 20px 30px rgba(0, 0, 0, 0.04),
+            0px 6px 10px rgba(0, 0, 0, 0.02);
+    }
 
-    box-shadow: 0px 20px 30px rgba(0, 0, 0, 0.04),
-        0px 6px 10px rgba(0, 0, 0, 0.02);
+    &__title {
+        margin: 0 0 16px;
+
+        font-weight: 600;
+        font-size: 28px;
+        line-height: 35px;
+    }
 
     &__field {
-        margin-bottom: 17px;
+        margin-bottom: 16px;
+
+        &:nth-child(4) {
+            margin-bottom: 25px;
+        }
 
         &._required {
             .form__label {
@@ -225,10 +242,44 @@ const formSubmit = () => {
         line-height: 13px;
         color: #ff8484;
     }
+
+    textarea.form__input { 
+        width: 100%;
+        max-height: 200px;
+        min-height: 124px;
+        padding: 11px 16px;
+        border-radius: 4px;
+        box-sizing: border-box;
+        border: 1px solid transparent;
+
+        outline: none;
+        resize: vertical;
+
+        font-size: 12px;
+        line-height: 15px;
+        box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+        -webkit-box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+        transition: all 0.2s ease-in-out;
+
+        &.error {
+            border-color: #ff8484;
+        }
+
+        &:focus {
+            box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.1),
+                0px 1px 3px rgba(0, 0, 0, 0.1);
+            -webkit-box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.1),
+                0px 1px 3px rgba(0, 0, 0, 0.1);
+        }
+
+        &::placeholder {
+            color: #b4b4b4;
+        }
+    }
 }
 
 @media (min-width: 600px) {
-    .form {
+    .form__wrapper {
         padding: 25px;
     }
 }
