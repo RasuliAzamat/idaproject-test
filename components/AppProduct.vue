@@ -89,7 +89,7 @@ const { id, link, name, description, price } = defineProps({
         top: 0px;
         right: 0px;
 
-        padding: 9px;
+        padding: 8px 9.5px;
         border-bottom-left-radius: 10px;
         border-top-right-radius: 4px;
 
