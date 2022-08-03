@@ -102,8 +102,8 @@ const options = ref([
     margin-bottom: 50px;
 
     .form {
-        position: sticky;
-        top: inherit;
+        position: sticky !important;
+        top: 0;
     }
 }
 
