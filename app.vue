@@ -1,8 +1,6 @@
 <template>
     <div class="app-container flex-container">
         <aside class="aside">
-            <h2>Добавление товара</h2>
-
             <AppForm @postProduct="postProduct" />
         </aside>
 
@@ -91,7 +89,7 @@ const options = ref([
 .app-container {
     max-width: 1440px;
     margin: 0 auto;
-    padding: 5px 10px;
+    padding: 16px;
 }
 
 .flex-container {
@@ -101,10 +99,11 @@ const options = ref([
 
 .aside {
     flex-basis: 25%;
-    margin-bottom: 70px;
+    margin-bottom: 50px;
 
-    h2 {
-        margin: 15px 0 30px;
+    .form {
+        position: sticky;
+        top: inherit;
     }
 }
 
@@ -112,7 +111,7 @@ const options = ref([
     flex-basis: 75%;
 
     .select-wrapper {
-        margin: 15px 0 30px auto;
+        margin: 0 0 16px auto;
     }
 }
 
@@ -120,9 +119,7 @@ const options = ref([
     display: grid;
     grid-template-columns: 1fr;
     grid-template-rows: max-content;
-    gap: 20px 20px;
-
-    margin-bottom: 50px;
+    gap: 16px 16px;
 }
 
 .products-enter-active,
@@ -145,12 +142,11 @@ const options = ref([
         flex-direction: row;
     }
 
-    .form {
-        padding: 25px;
-    }
-
     .aside {
         flex-basis: 45%;
+        
+        margin-bottom: 0;
+        margin-right: 16px;
     }
 
     .main {
@@ -161,8 +157,6 @@ const options = ref([
 @media (min-width: 768px) {
     .aside {
         flex-basis: 35%;
-        margin-bottom: 0;
-        margin-right: 20px;
     }
 
     .main {
@@ -174,12 +168,17 @@ const options = ref([
 }
 
 @media (min-width: 1024px) {
+    .app-container {
+        padding: 32px;
+    }
+
     .aside {
-        flex-basis: 25%;
+        min-width: 332px;
+        flex-basis: 20%;
     }
 
     .main {
-        flex-basis: 75%;
+        flex-basis: 80%;
     }
 
     .products {
